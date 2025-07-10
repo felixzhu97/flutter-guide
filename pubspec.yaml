@@ -1,0 +1,72 @@
+name: flutter_guide
+description: Flutter技术入门与实践完整案例
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # 状态管理
+  provider: ^6.1.1
+
+  # 网络请求
+  http: ^1.1.0
+  dio: ^5.3.2
+
+  # 本地存储
+  shared_preferences: ^2.2.2
+  sqflite: ^2.3.0
+
+  # 图片处理
+  cached_network_image: ^3.3.0
+  image_picker: ^1.0.4
+
+  # 动画
+  lottie: ^2.7.0
+
+  # 国际化
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.18.1
+
+  # UI组件
+  flutter_staggered_grid_view: ^0.7.0
+
+  # 工具类
+  path: ^1.8.3
+
+  # 图标
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/animations/
+    - assets/icons/
+
+  fonts:
+    - family: CustomFont
+      fonts:
+        - asset: assets/fonts/CustomFont-Regular.ttf
+        - asset: assets/fonts/CustomFont-Bold.ttf
+          weight: 700
+
+flutter_intl:
+  enabled: true
+  class_name: S
+  main_locale: zh_CN
+  arb_dir: lib/l10n
+  output_dir: lib/generated
