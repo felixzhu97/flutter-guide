@@ -52,46 +52,77 @@ class _WebViewScreenState extends State<WebViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('小程序'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () {
-              _controller.reload();
-            },
-            tooltip: '刷新',
-          ),
-        ],
-      ),
       body: Stack(
         children: [
+          // WebView 始终显示在最底层
+          if (_errorMessage == null) WebViewWidget(controller: _controller),
+          // 错误提示覆盖层
           if (_errorMessage != null)
-            _buildErrorWidget()
-          else
-            WebViewWidget(controller: _controller),
-          if (_isLoading)
             Container(
               color: Theme.of(context).scaffoldBackgroundColor,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    const SizedBox(height: AppConstants.defaultPadding),
-                    Text(
-                      '加载中...',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
-                    ),
-                  ],
+              child: _buildErrorWidget(),
+            ),
+          // 加载指示器覆盖层（仅在加载时显示，且允许 WebView 交互）
+          if (_isLoading && _errorMessage == null)
+            IgnorePointer(
+              ignoring: true,
+              child: Container(
+                color:
+                    Theme.of(context).scaffoldBackgroundColor.withOpacity(0.7),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      const SizedBox(height: AppConstants.defaultPadding),
+                      Text(
+                        '加载中...',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
+          // 右上角浮动关闭按钮（浅蓝色透明样式）
+          Positioned(
+            top: AppConstants.smallPadding,
+            right: AppConstants.defaultPadding,
+            child: SafeArea(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFFFFF).withOpacity(0.1),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 143, 139, 139)
+                            .withOpacity(0.2),
+                        width: 1,
+                      ),
+                    ),
+                    child: CustomPaint(
+                      size: const Size(16, 16),
+                      painter: _TargetIconPainter(),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -142,4 +173,33 @@ class _WebViewScreenState extends State<WebViewScreen> {
       ),
     );
   }
+}
+
+// 目标图标绘制器（圆圈+中心点）
+class _TargetIconPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = size.width / 2 - 8;
+
+    // 绘制外圈（粗轮廓）
+    final circlePaint = Paint()
+      ..color = Colors.black
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 3.0
+      ..strokeCap = StrokeCap.round;
+
+    canvas.drawCircle(center, radius, circlePaint);
+
+    // 绘制中心点（实心）
+    final dotPaint = Paint()
+      ..color = Colors.black
+      ..style = PaintingStyle.fill;
+
+    final dotRadius = 4.5;
+    canvas.drawCircle(center, dotRadius, dotPaint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
