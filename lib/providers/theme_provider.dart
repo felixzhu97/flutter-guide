@@ -8,68 +8,68 @@ class ThemeProvider with ChangeNotifier {
   ThemeMode get themeMode => _themeMode;
 
   ThemeData get lightTheme => ThemeData(
-    useMaterial3: true,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.blue,
-      brightness: Brightness.light,
-    ),
-    appBarTheme: const AppBarTheme(centerTitle: true, elevation: 0),
-    cardTheme: CardTheme(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
-      ),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+          brightness: Brightness.light,
         ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppConstants.defaultPadding,
-          vertical: AppConstants.smallPadding,
+        appBarTheme: const AppBarTheme(centerTitle: true, elevation: 0),
+        cardTheme: CardThemeData(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+          ),
         ),
-      ),
-    ),
-    inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
-      ),
-      contentPadding: const EdgeInsets.all(AppConstants.defaultPadding),
-    ),
-  );
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+            ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppConstants.defaultPadding,
+              vertical: AppConstants.smallPadding,
+            ),
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+          ),
+          contentPadding: const EdgeInsets.all(AppConstants.defaultPadding),
+        ),
+      );
 
   ThemeData get darkTheme => ThemeData(
-    useMaterial3: true,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.blue,
-      brightness: Brightness.dark,
-    ),
-    appBarTheme: const AppBarTheme(centerTitle: true, elevation: 0),
-    cardTheme: CardTheme(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
-      ),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+          brightness: Brightness.dark,
         ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppConstants.defaultPadding,
-          vertical: AppConstants.smallPadding,
+        appBarTheme: const AppBarTheme(centerTitle: true, elevation: 0),
+        cardTheme: CardThemeData(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+          ),
         ),
-      ),
-    ),
-    inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
-      ),
-      contentPadding: const EdgeInsets.all(AppConstants.defaultPadding),
-    ),
-  );
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+            ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppConstants.defaultPadding,
+              vertical: AppConstants.smallPadding,
+            ),
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+          ),
+          contentPadding: const EdgeInsets.all(AppConstants.defaultPadding),
+        ),
+      );
 
   ThemeProvider() {
     _loadTheme();
