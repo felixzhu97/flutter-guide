@@ -11,6 +11,7 @@ import 'todo_screen.dart';
 import 'network_screen.dart';
 import 'animation_screen.dart';
 import 'settings_screen.dart';
+import 'webview_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -145,6 +146,20 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.teal,
                   onTap: () {
                     context.read<ThemeProvider>().toggleTheme();
+                  },
+                ),
+                FeatureCard(
+                  icon: Icons.web,
+                  title: '小程序',
+                  description: 'WebView 小程序',
+                  color: Colors.indigo,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const WebViewScreen(),
+                      ),
+                    );
                   },
                 ),
               ],
